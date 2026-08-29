@@ -1,0 +1,37 @@
+# Simple Web Stack - Task 0
+
+## Diagram Link
+Screenshot of Whiteboard Diagram: [BURAYA_SEKIL_LINKINI_QOYUN]
+
+---
+
+## Infrastructure Specifics
+
+### 1. What is a Server?
+A server is a physical hardware computer or virtual machine running an operating system that provides resources, services, data, or programs to other computers (clients) over a network.
+
+### 2. What is the Role of the Domain Name?
+A domain name (`foobar.com`) is a human-readable address used to access a website on the internet. It maps human-friendly names to numerical IP addresses (`8.8.8.8`) so users don't have to memorize IP addresses.
+
+### 3. What Type of DNS Record `www` is in `www.foobar.com`?
+In this setup, `www` is configured as an **A Record** (Address Record) pointing directly to the server's IPv4 address `8.8.8.8`.
+
+### 4. What is the Role of the Web Server (Nginx)?
+The web server acts as the frontline server that accepts incoming HTTP/HTTPS requests from client browsers. It handles static content directly (HTML, CSS, images) and proxies dynamic requests to the application server.
+
+### 5. What is the Role of the Application Server?
+The application server processes dynamic content and business logic. It executes server-side code (e.g., Python, PHP, Node.js) and interacts with the database to generate dynamic HTML or JSON responses.
+
+### 6. What is the Role of the Database (MySQL)?
+The database is a structured storage system that persistently holds, retrieves, and updates user and application data (such as account credentials, posts, transactions, and site content).
+
+### 7. What is the Server Using to Communicate with the Computer of the User?
+The server communicates with the user's computer via standard network protocols: **TCP/IP** at the transport layer and **HTTP/HTTPS** at the application layer.
+
+---
+
+## Infrastructure Issues & Limitations
+
+* **SPOF (Single Point of Failure):** Since everything runs on a single server (Nginx, Application Server, and MySQL), if the hardware fails or any critical component crashes, the entire website goes offline instantly.
+* **Downtime During Maintenance:** Any deployment of new code or software updates requires restarting components like the web server or application server, causing service interruption for users.
+* **Lack of Scalability:** A single server has finite CPU, RAM, and disk IO resources. It cannot handle vertical scaling beyond its hardware limits and cannot scale horizontally to distribute high incoming traffic.
