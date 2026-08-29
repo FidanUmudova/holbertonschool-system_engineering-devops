@@ -1,0 +1,93 @@
+# Scale Up - Task 3
+
+---
+
+## Infrastructure Specifics
+
+1. Why Add One More Server?
+
+An additional server is added to increase the infrastructure's capacity and improve scalability.
+
+Adding more servers allows the workload to be distributed across multiple machines instead of relying on a single server.
+
+This improves:
+
+* Performance
+* Availability
+* Scalability
+* Reliability
+
+2. Why Add a Second Load Balancer?
+
+A second HAProxy load balancer is added to remove the Single Point of Failure created by having only one load balancer.
+
+The two load balancers are configured as a cluster.
+
+If one load balancer fails, the other load balancer can continue handling incoming traffic.
+
+This improves the availability of the infrastructure.
+
+3. Why Split Components onto Dedicated Servers?
+
+The infrastructure separates the main components so that web servers, application servers, and database servers run on their own dedicated servers.
+
+This provides a clear separation of responsibilities.
+
+#### Web Servers
+
+The web servers run Nginx and are responsible for:
+
+* Receiving HTTP/HTTPS requests
+* Serving static files
+* Forwarding dynamic requests to application servers
+
+#### Application Servers
+
+The application servers run the application code and are responsible for:
+
+* Processing business logic
+* Generating dynamic content
+* Communicating with the database
+
+#### Database Servers
+
+The database servers are responsible for:
+
+* Storing application data
+* Processing database queries
+* Replicating data between Primary and Replica databases
+
+4. Benefits of Separating Components
+
+Splitting components onto dedicated servers makes it possible to scale each part independently.
+
+For example:
+
+* More web servers can be added when there is high web traffic.
+* More application servers can be added when application processing increases.
+* Database servers can be scaled separately when database usage becomes high.
+
+This also improves maintainability because each server has a specific responsibility.
+
+5. How the Infrastructure Handles a User Request
+
+1. A user requests `www.foobar.com`.
+2. DNS resolves the domain name to the infrastructure's IP address.
+3. The HAProxy load balancer cluster receives the request.
+4. A load balancer distributes the request to an available Nginx web server.
+5. Nginx serves static content or forwards dynamic requests to an application server.
+6. The application server processes the request and communicates with the MySQL database when necessary.
+7. The response returns through the infrastructure to the user.
+
+---
+
+## Why This Infrastructure Is Better
+
+This infrastructure improves the previous design by:
+
+* Adding another server for additional capacity
+* Using two load balancers for higher availability
+* Separating web, application, and database components
+* Allowing each component to scale independently
+* Reducing resource competition
+* Improving maintainability and reliability
